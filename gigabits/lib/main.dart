@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: HomePage(),
     );
   }
@@ -71,7 +71,47 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: "User Email",
               prefixIcon: Icon(Icons.mail, color: Colors.black),
             ),
-          )
+          ),
+          SizedBox(
+            height: 26.0,
+          ),
+          TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "User Password",
+              prefixIcon: Icon(Icons.lock, color: Colors.black),
+            ),
+          ),
+          SizedBox(
+            height: 12.0,
+          ),
+          Text(
+            "Forgot your password?",
+            style: TextStyle(color: Colors.blue),
+          ),
+          // SizedBox(
+          //   height: 88.0,
+          // ),
+          SizedBox(
+            height: 88.0,
+            width: double.infinity,
+            child: RawMaterialButton(
+              fillColor: Color(0xFF0069FE),
+              elevation: 0.0,
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(12.0)),
+              ),
+              onPressed: null,
+              child: Text(
+                "Login",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
