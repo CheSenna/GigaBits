@@ -1,2 +1,0 @@
-# GigaBits
-Gigabits app
