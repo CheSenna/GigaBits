@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gigabits/screens/profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -77,6 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -101,9 +105,10 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 44.0,
           ),
-          const TextField(
+          TextField(
+            controller: _emailController,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "User Email",
               prefixIcon: Icon(Icons.mail, color: Colors.black),
             ),
@@ -111,9 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 26.0,
           ),
-          const TextField(
+          TextField(
+            controller: _passwordController,
             obscureText: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "User Password",
               prefixIcon: Icon(Icons.lock, color: Colors.black),
             ),
@@ -138,7 +144,17 @@ class _LoginScreenState extends State<LoginScreen> {
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12.0)),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                User? user = await loginUsingEmailPassword(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    context: context);
+                print(user);
+                if (user != null) {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const ProfileScreen()));
+                }
+              },
               child: const Text(
                 "Login",
                 style: TextStyle(
